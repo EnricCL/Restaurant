@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html Lan="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Restaurant - Fase3</title>
+</head>
+
+<body>
+
+<script language="javascript">
+
+var bitllet5EUR, bitllet10EUR, bitllet20EUR, bitllet50EUR,
+bitllet100EUR, bitllet200EUR, bitllet500EUR;
+
+var preuTotalMenjar=0;
+
+var menuPlat = [];
+
+var preuPlat = [];
+
+var comanda = [];
+
+var entradaComanda="";
+var entradaVoler;
+
+for(var i=0; i < 5; i++){
+
+    //Omplir els 2 arrays amb 1 bucle for
+    if(i==0){
+        menuPlat.push("Sopa");
+        preuPlat.push(5);
+    }else if(i==1){
+        menuPlat.push("Arros");
+        preuPlat.push(5);
+    }else if(i==2){
+        menuPlat.push("Bistec");
+        preuPlat.push(10);
+    }else if(i==3){
+        menuPlat.push("Paella");
+        preuPlat.push(15);
+    }else if(i==4){
+        menuPlat.push("Canelons");
+        preuPlat.push(10);
+    }
+}
+
+//Mostrar menu
+document.write("Menú: <p>");
+for(var i=0; i<5; i++){
+    document.write( '- '  + menuPlat[i] + ' - ' + preuPlat[i] + '</br>');
+    
+}
+
+
+//Va demanant plats fins que no es volguin més
+var voler=true;
+var comptador=0;
+var entradaVoler="";
+var entradaComanda="";
+while(voler){
+    if(comptador==0) {
+        entradaComanda = prompt("Què vols per menjar?:");
+        comptador++;
+    }else{ 
+        entradaComanda = prompt("Què més vols?:");
+    }
+    comanda.push(entradaComanda);
+    entradaVoler = prompt("Vols seguir demanant? (1:Si / 0:No)");
+    if(entradaVoler=="0"){
+        voler = false;
+    } 
+}
+
+//Comparar comanda amb el menu i sumar preus
+for(var i=0; i<comanda.length; i++){
+    for(var j=0; j<menuPlat.length; j++){
+        if(comanda[i]==menuPlat[j]){
+            preuTotalMenjar = preuTotalMenjar + preuPlat[j];
+            j=menuPlat.length;
+        }else if(j == menuPlat.length-1){
+            document.write("</br>El producte que heu demanat no existeix: ("+comanda[i]+")");
+        }
+    }
+}
+
+//Dir el preu total a pagar del menjar
+document.write("</br>El preu total a pagar és de: "+preuTotalMenjar);
+
+//Calcular amb quins bitllets i quants d'aquests es necessiten per a pagar el total del menjar
+
+var preuTotal = parseInt(preuTotalMenjar);
+
+bitllet500EUR = parseInt(preuTotal / 500); preuTotal = parseInt(preuTotal%500);
+bitllet200EUR = parseInt(preuTotal / 200); preuTotal = parseInt(preuTotal%200);
+bitllet100EUR = parseInt(preuTotal / 100); preuTotal = parseInt(preuTotal%100);
+bitllet50EUR = parseInt(preuTotal / 50); preuTotal = parseInt(preuTotal%50);
+bitllet20EUR = parseInt(preuTotal / 20); preuTotal = parseInt(preuTotal%20);
+bitllet10EUR = parseInt(preuTotal / 10); preuTotal = parseInt(preuTotal%10);
+bitllet5EUR = parseInt(preuTotal) /5;
+
+document.write("</br>Bitllets d'Euro amb els que pots pagar:</br>"+
+							bitllet500EUR + " de 500</br>"+
+							bitllet200EUR + " de 200\</br>"+
+							bitllet100EUR + " de 100\</br>"+
+							bitllet50EUR + " de 50\</br>"+
+							bitllet20EUR + " de 20\</br>"+
+							bitllet10EUR + " de 10\</br>"+
+							bitllet5EUR + " de 5");
+
+</script>
+
+</body>
+
+</html>
